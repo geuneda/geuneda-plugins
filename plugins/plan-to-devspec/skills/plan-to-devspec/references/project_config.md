@@ -57,6 +57,53 @@
 5. `output_dir` 기본값을 `docs/dev-specs`로 제안하고 사용자가 다르게 원하면 변경한다.
 6. 위 내용을 모두 모아 `.plan-to-devspec.json`에 저장한다.
 
+## 페이지 목록 조회 (데이터 소스 행 수집)
+
+노션 MCP에는 데이터 소스의 모든 행을 직접 가져오는 도구가 없다. 다음 우회 방법을 사용한다.
+
+### 방법 1: notion-search (권장)
+
+`data_source_url`을 지정해 해당 데이터 소스 내에서 검색.
+
+```
+notion-search
+  query: "시스템 보상"              # semantic search이므로 데이터 소스 도메인 일반 키워드
+  data_source_url: collection://...
+  page_size: 25                     # 최대값
+  max_highlight_length: 0           # 응답 크기 절약
+  filters: {}
+```
+
+반환되는 `results` 배열의 각 항목은 `{id, title, url, type, timestamp}` 만 포함한다. `상태`, `작업 순서` 같은 properties는 포함되지 않으므로, 각 페이지를 `notion-fetch`로 한 번 더 조회해 properties를 확인해야 한다.
+
+### query 선택 팁
+
+- 첫 시도는 데이터 소스 제목/주제와 관련된 일반 단어 ("기획", "시스템", "보상" 등)
+- 너무 특이한 단어를 쓰면 일부 페이지가 누락될 수 있음
+- 결과 수가 적으면 다른 query로 재검색해 합집합으로 사용
+
+### 방법 2: 사용자 직접 입력 (페이지 25개 초과 / search 결과가 신뢰 안 갈 때)
+
+```
+사용자에게 페이지 URL 목록을 줄바꿈으로 받아 그 목록을 처리 대상으로 사용
+```
+
+### 방법 3: notion-fetch + view URL (미지원)
+
+`view://...` URL을 fetch에 넘기면 400 에러가 발생하므로 사용 불가.
+
+## 페이지 properties 확인
+
+`notion-search` 결과의 페이지 ID를 `notion-fetch`로 조회하면 properties가 함께 반환된다:
+
+```
+<properties>
+{"기획서":"일일 출석 보상 시스템","상태":"기획 완료","작업 순서":1,"비고":""}
+</properties>
+```
+
+이 값으로 `상태=="기획 완료"` 필터링 및 `작업 순서` 정렬을 수행한다.
+
 ## 기준 프로젝트 (참고)
 
 예시로 사용되는 게임팀 - 로켓단 게임즈의 TC 페이지:
