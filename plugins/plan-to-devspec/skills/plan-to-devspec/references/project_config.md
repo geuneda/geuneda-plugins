@@ -31,6 +31,11 @@
     "needs_review": "검토 필요",
     "dev_in_progress": "개발 진행중",
     "dev_done": "개발 완료"
+  },
+  "project_pattern": {
+    "storage": "server",
+    "data_managed_in_sheet": true,
+    "sheet_url": ""
   }
 }
 ```
@@ -45,6 +50,23 @@
 | `output_dir` | O | 개발 명세서 저장 경로 (프로젝트 루트 기준 상대 경로) |
 | `schema.*` | O | 노션 컬럼명 매핑 (프로젝트마다 다를 수 있음) |
 | `status_values.*` | O | 노션 상태 옵션 이름 매핑 |
+| `project_pattern.storage` | O | `"server"` 또는 `"local"`. 영구 데이터의 저장 위치 패턴 |
+| `project_pattern.data_managed_in_sheet` | O | 기획 데이터(밸런싱/콘텐츠)를 구글 시트로 관리하는지 |
+| `project_pattern.sheet_url` | △ | 시트 관리 시 시트 URL (참고용, 없어도 됨) |
+
+### project_pattern 사용 방식
+
+이 값들은 검토 로직과 명세서 작성 모두에 영향을 미친다.
+
+**검토 시**:
+- `data_managed_in_sheet=true` 이면 확률표/가격/보상 풀 같은 시트 관리 데이터를 검토 필요로 처리하지 않는다 (review_checklist.md §1 참조).
+- `storage` 값에 따라 저장 위치 결정을 자동 추론하므로 검토 필요로 처리하지 않는다 (review_checklist.md §2 참조).
+
+**명세서 작성 시** (dev_spec_template.md 데이터 모델 섹션):
+- 시트 관리 데이터: "구글 시트로 관리됨" 표시
+- 저장 위치: `storage` 값에 따라 자동 표기 (`서버 DB (영구)` 또는 `로컬 저장 (PlayerPrefs/SQLite/JSON 중 프로젝트 표준)`)
+- 보안 민감 데이터(결제/재화/보상): `storage`와 무관하게 서버 권위
+- 초기화돼도 되는 임시 데이터: 캐시
 
 ## 신규 프로젝트 설정 절차
 
