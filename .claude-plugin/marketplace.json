@@ -21,6 +21,13 @@
       "description": "TC(테스트케이스) 등록·처리 통합 플러그인. tc-dev-writer 스킬은 발견한 현상을 개발자 작업 가능 형태로 구체화해 노션에 등록, tc-dev-resolver 스킬은 TC 번호를 받아 내용 분석·코드 수정 후 처리 날짜·원인·상태를 자동 갱신",
       "keywords": ["notion", "tc", "testcase", "qa", "bug-report", "bug-fix", "game", "rocketdan"],
       "category": "productivity"
+    },
+    {
+      "name": "data-validator",
+      "source": "./plugins/data-validator",
+      "description": "Google Sheets 게임 데이터 테이블을 스키마/크로스참조/밸런스 이상치 3종 검증 후 Slack으로 알림. 매일 오전 10시 KST 자동 실행 및 수동 트리거(/validate-data) 지원.",
+      "keywords": ["google-sheets", "validation", "game-data", "slack", "balance", "schema", "rocketdan"],
+      "category": "productivity"
     }
   ]
 }
