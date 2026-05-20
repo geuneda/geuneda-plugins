@@ -6,7 +6,7 @@
 
 | 위치 | 역할 | 경로 (예) |
 |---|---|---|
-| 사용자 로컬 작업본 | 직접 수정 및 git push 대상 | `/Users/<id>/geuneda-plugins/plugins/tc-dev-writer/` |
+| 사용자 로컬 작업본 | 직접 수정 및 git push 대상 | `/Users/<id>/geuneda-plugins/plugins/tc-dev/skills/tc-dev-writer/` |
 | (참고) 마켓플레이스 캐시 | 팀원이 `update` 후 받아가는 캐시 | `~/.claude/plugins/marketplaces/geuneda-plugins/` |
 
 GitHub 원격: upstream `https://github.com/geuneda/geuneda-plugins`, 개인 fork는 origin (예: `TeamSpartaJaewook/geuneda-plugins`).
@@ -17,17 +17,19 @@ GitHub 원격: upstream `https://github.com/geuneda/geuneda-plugins`, 개인 for
 
 1. **로컬 작업본에서 직접 수정** —
    ```
-   <작업본>/plugins/tc-dev-writer/skills/tc-dev-writer/SKILL.md
-   <작업본>/plugins/tc-dev-writer/skills/tc-dev-writer/references/*.md
+   <작업본>/plugins/tc-dev/skills/tc-dev-writer/SKILL.md
+   <작업본>/plugins/tc-dev/skills/tc-dev-writer/references/*.md
    ```
 2. **로컬 테스트** — 아래 "테스트 절차" 참조
 3. **커밋 + push** —
    ```bash
-   git add plugins/tc-dev-writer
+   git add plugins/tc-dev/skills/tc-dev-writer
    git commit -m "fix(tc-dev-writer): {요약}"
    git push origin <branch>
    ```
 4. **팀원 업데이트** — 팀원은 `/plugin marketplace update geuneda-plugins` 실행 (변경이 upstream에 머지된 후)
+
+> 참고: `tc-dev-writer`와 `tc-dev-resolver`는 동일 플러그인 `tc-dev` 아래의 두 스킬이다. 두 스킬을 동시에 수정한다면 `git add plugins/tc-dev`로 통째로 묶어 한 커밋에 담아도 된다.
 
 ## 테스트 절차
 

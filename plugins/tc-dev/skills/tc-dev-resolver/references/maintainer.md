@@ -4,16 +4,18 @@
 
 ## 스킬 파일이 사는 곳
 
-| 위치 | 역할 | 경로 |
+| 위치 | 역할 | 경로 (예) |
 |---|---|---|
-| 마켓플레이스 git 클론 | 팀 배포 소스. git push 대상 | `~/.claude/plugins/marketplaces/geuneda-plugins/plugins/tc-dev-resolver/` |
+| 사용자 로컬 작업본 | 직접 수정 및 git push 대상 | `/Users/<id>/geuneda-plugins/plugins/tc-dev/skills/tc-dev-resolver/` |
+| (참고) 마켓플레이스 캐시 | 팀원이 `update` 후 받아가는 캐시 | `~/.claude/plugins/marketplaces/geuneda-plugins/` |
 
-GitHub 저장소: https://github.com/geuneda/geuneda-plugins
+GitHub 원격: upstream `https://github.com/geuneda/geuneda-plugins`, 개인 fork는 origin.
 
-`tc-dev-writer`와 동일한 정책: 마켓플레이스 클론에서 직접 수정하고 commit + push. 팀원은 `/plugin marketplace update geuneda-plugins`로 받는다.
+`tc-dev-writer`와 동일 플러그인(`tc-dev`) 아래에 있다. 사용자 로컬 작업본에서 수정하고 origin에 push, PR로 upstream 머지. 팀원은 `/plugin marketplace update geuneda-plugins`로 받는다.
 
 ## tc-dev-writer와의 관계
 
+- **같은 플러그인의 자매 스킬**: 두 스킬은 모두 `plugins/tc-dev/skills/` 아래에 있고 같은 `plugin.json`을 공유한다.
 - 두 스킬은 **같은 노션 데이터소스**를 다룬다. 컬럼 매핑 / 옵션값이 한쪽에서만 바뀌면 어긋난다.
 - 동일한 설정 파일(`.tc-dev-writer.json` 또는 `~/.claude/tc-dev-writer.config.json`)을 공유한다 — 의도된 설계다. 파일을 두 개로 쪼개지 않는다.
 - `tc-dev-writer`는 페이지 생성, `tc-dev-resolver`는 페이지 속성 갱신. 권한 분리가 분명하므로 양쪽이 같은 페이지를 동시에 건드릴 일은 거의 없다.
@@ -21,20 +23,20 @@ GitHub 저장소: https://github.com/geuneda/geuneda-plugins
 
 ## 변경 흐름 (표준)
 
-1. **마켓플레이스 클론에서 직접 수정** —
+1. **로컬 작업본에서 직접 수정** —
    ```
-   ~/.claude/plugins/marketplaces/geuneda-plugins/plugins/tc-dev-resolver/skills/tc-dev-resolver/SKILL.md
-   ~/.claude/plugins/marketplaces/geuneda-plugins/plugins/tc-dev-resolver/skills/tc-dev-resolver/references/*.md
+   <작업본>/plugins/tc-dev/skills/tc-dev-resolver/SKILL.md
+   <작업본>/plugins/tc-dev/skills/tc-dev-resolver/references/*.md
    ```
 2. **로컬 테스트** — 아래 "테스트 절차" 참조
 3. **커밋 + push** —
    ```bash
-   cd ~/.claude/plugins/marketplaces/geuneda-plugins
-   git add plugins/tc-dev-resolver
+   git add plugins/tc-dev/skills/tc-dev-resolver
    git commit -m "fix(tc-dev-resolver): {요약}"
-   git push
+   git push origin <branch>
    ```
-4. **팀원 업데이트** — 팀원은 `/plugin marketplace update geuneda-plugins` 실행
+   두 스킬을 동시에 손봤다면 `git add plugins/tc-dev`로 한 번에 묶어도 무방하다.
+4. **팀원 업데이트** — 팀원은 `/plugin marketplace update geuneda-plugins` 실행 (변경이 upstream에 머지된 후)
 
 ## 테스트 절차
 

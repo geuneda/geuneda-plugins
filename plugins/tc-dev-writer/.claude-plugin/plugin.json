@@ -1,9 +1,0 @@
-{
-  "name": "tc-dev-writer",
-  "description": "TC(테스트케이스) 내용과 우선순위를 입력받아 개발자가 작업 가능한 형태로 구체화하고 노션 TC 데이터소스에 새 항목을 등록한다.",
-  "author": {
-    "name": "geuneda"
-  },
-  "repository": "https://github.com/geuneda/geuneda-plugins",
-  "keywords": ["notion", "tc", "testcase", "qa", "bug-report", "game"]
-}

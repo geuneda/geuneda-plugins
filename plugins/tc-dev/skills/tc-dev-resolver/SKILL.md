@@ -295,5 +295,5 @@ notion-update-page
 
 `references/maintainer.md`를 먼저 읽는다. 핵심 요점:
 
-- 스킬 파일은 마켓플레이스 git 클론(`~/.claude/plugins/marketplaces/geuneda-plugins/plugins/tc-dev-resolver/`)에 있다. 직접 수정 후 commit + push 하면 팀원이 `/plugin marketplace update geuneda-plugins`로 받아간다.
+- 스킬 파일은 사용자의 로컬 작업본(예: `/Users/<id>/geuneda-plugins/plugins/tc-dev/skills/tc-dev-resolver/`)에 있다. 이 스킬은 `tc-dev` 플러그인의 두 스킬 중 하나로, `tc-dev-writer` 스킬과 같은 플러그인을 공유한다. 직접 수정 후 commit + push 하면 팀원이 `/plugin marketplace update geuneda-plugins`로 받아간다.
 - 노션 TC 데이터소스 schema가 변경되면 `tc-dev-writer`와 `tc-dev-resolver` 양쪽의 `references/project_config.md`를 동기 갱신한다 (같은 데이터소스를 공유하므로 한쪽만 고치면 어긋난다).

@@ -16,17 +16,10 @@
       "category": "productivity"
     },
     {
-      "name": "tc-dev-writer",
-      "source": "./plugins/tc-dev-writer",
-      "description": "TC(테스트케이스) 내용과 우선순위를 받아 개발자가 작업 가능한 형태로 구체화하고 노션 TC 데이터소스에 등록",
-      "keywords": ["notion", "tc", "testcase", "qa", "bug-report", "game", "rocketdan"],
-      "category": "productivity"
-    },
-    {
-      "name": "tc-dev-resolver",
-      "source": "./plugins/tc-dev-resolver",
-      "description": "TC 번호를 받아 노션 TC 데이터소스의 '내용'을 분석하고 코드 수정·원인 분석을 수행한 뒤 처리 날짜·원인·상태를 자동 갱신. 수정 불가 시 '처리 불가'로 사유 회신",
-      "keywords": ["notion", "tc", "testcase", "qa", "bug-fix", "game", "rocketdan"],
+      "name": "tc-dev",
+      "source": "./plugins/tc-dev",
+      "description": "TC(테스트케이스) 등록·처리 통합 플러그인. tc-dev-writer 스킬은 발견한 현상을 개발자 작업 가능 형태로 구체화해 노션에 등록, tc-dev-resolver 스킬은 TC 번호를 받아 내용 분석·코드 수정 후 처리 날짜·원인·상태를 자동 갱신",
+      "keywords": ["notion", "tc", "testcase", "qa", "bug-report", "bug-fix", "game", "rocketdan"],
       "category": "productivity"
     }
   ]
