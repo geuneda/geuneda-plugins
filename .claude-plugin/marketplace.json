@@ -21,6 +21,13 @@
       "description": "TC(테스트케이스) 등록·처리 통합 플러그인. tc-dev-writer 스킬은 발견한 현상을 개발자 작업 가능 형태로 구체화해 노션에 등록, tc-dev-resolver 스킬은 TC 번호를 받아 내용 분석·코드 수정 후 처리 날짜·원인·상태를 자동 갱신",
       "keywords": ["notion", "tc", "testcase", "qa", "bug-report", "bug-fix", "game", "rocketdan"],
       "category": "productivity"
+    },
+    {
+      "name": "qa-testcase-notion",
+      "source": "./plugins/qa-testcase-notion",
+      "description": "개발 완료된 기능의 코드 변경(커밋/PR diff)을 분석해 QA 친화 표현으로 변환하고 Notion TC 템플릿 DB에 행을 자동 추가. 환경 클러스터링 3단계 방법론으로 케이스 순서 최적화 + view 정렬·zero-pad 번호로 표시 안정성 보장",
+      "keywords": ["notion", "tc", "testcase", "qa", "diff", "claude-code", "game", "rocketdan"],
+      "category": "productivity"
     }
   ]
 }

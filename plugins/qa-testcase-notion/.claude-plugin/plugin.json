@@ -1,0 +1,9 @@
+{
+  "name": "qa-testcase-notion",
+  "description": "개발 완료된 기능의 코드 변경(커밋/PR diff)을 분석해 QA 친화 표현으로 변환하고, 사용자가 미리 복제해 둔 Notion TC 템플릿 페이지의 inline DB에 행을 자동 추가한다. 환경 클러스터링 기반 3단계 방법론으로 케이스 순서를 최적화하며, view 정렬과 zero-pad 번호로 표시 안정성도 보장.",
+  "author": {
+    "name": "Imysss"
+  },
+  "repository": "https://github.com/geuneda/geuneda-plugins",
+  "keywords": ["notion", "tc", "testcase", "qa", "diff", "claude-code", "game", "rocketdan"]
+}
