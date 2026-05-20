@@ -43,8 +43,7 @@
     "done": "완료",
     "cant_handle": "처리 불가"
   },
-  "default_status": "진행 전",
-  "naming_pattern": "TC-{YYYYMMDD}-{slug}"
+  "default_status": "진행 전"
 }
 ```
 
@@ -53,7 +52,7 @@
 | 필드 | 필수 | 설명 |
 |------|------|------|
 | `project_name` | O | 프로젝트 식별용 이름 |
-| `data_source_url` | O | TC 데이터소스 URL (collection:// 형식) |
+| `data_source_url` | O | TC 데이터소스 URL (collection:// 형식). `notion-search`의 `data_source_url` 파라미터에 그대로 넣어 기존 번호 조회 |
 | `data_source_id` | O | TC 데이터소스 ID (대시 포함, `notion-create-pages` parent용) |
 | `database_url` | △ | 데이터베이스 페이지 URL (참고용) |
 | `schema.*` | O | 노션 컬럼명 매핑 (프로젝트마다 다를 수 있음) |
@@ -61,7 +60,7 @@
 | `priority_values.*` | O | `우선순위` 컬럼의 옵션 이름 매핑 (당장/상/중/하) |
 | `status_values.*` | O | `상태` 컬럼의 옵션 이름 매핑 |
 | `default_status` | O | 신규 등록 시 기본 상태 (보통 `진행 전`) |
-| `naming_pattern` | △ | `번호` 자동 생성 패턴. 미지정 시 `TC-{YYYYMMDD}-{slug}` 사용 |
+| ~~`naming_pattern`~~ | ✗ | **폐기됨.** 번호는 더 이상 명명 규칙 기반이 아니라 (기존 정수 최대값 + 1)로 자동 부여. 이 키가 설정에 남아 있어도 무시된다. |
 
 ## 신규 프로젝트 설정 절차
 
@@ -96,7 +95,20 @@ CREATE TABLE "collection://3662dc3e-f514-809e-aca8-000bbc3d90ba" (
 )
 ```
 
-`번호`가 title 컬럼이므로 페이지의 title 자리에 들어간다. `원인`과 `처리 날짜`는 담당자가 TC를 처리하며 채우는 컬럼이라 **신규 등록 시 비워둔다**.
+`번호`가 title 컬럼이므로 페이지의 title 자리에 들어간다. **운영 규칙상 정수 문자열(`"1"`, `"2"`, ...)을 순차 부여**한다 — 신규 등록 시 `notion-search`로 기존 번호 중 정수 최대값을 찾아 +1. `원인`과 `처리 날짜`는 담당자가 TC를 처리하며 채우는 컬럼이라 **신규 등록 시 비워둔다**.
+
+### 다음 번호 조회 호출 예시
+
+```
+notion-search
+  query: "TC"           # semantic search — 값 자체는 부수적, data_source_url 필터가 핵심
+  data_source_url: "collection://3662dc3e-f514-809e-aca8-000bbc3d90ba"
+  page_size: 25
+  filters: {}
+  max_highlight_length: 0
+```
+
+응답의 `results[*].title`을 정수로 파싱해 최대값 + 1. `has_more`이면 `start_cursor`로 페이지네이션.
 
 ## 페이지 생성 호출 예시
 
@@ -107,7 +119,7 @@ notion-create-pages
     data_source_id: "3662dc3e-f514-809e-aca8-000bbc3d90ba"
   pages:
     - properties:
-        번호: "TC-20260520-보스전스킬"
+        번호: "6"   # = 기존 정수 최대값(5) + 1
         date:날짜:start: "2026-05-20"
         date:날짜:is_datetime: 0
         선택: "버그"

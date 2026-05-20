@@ -4,30 +4,30 @@
 
 ## 스킬 파일이 사는 곳
 
-| 위치 | 역할 | 경로 |
+| 위치 | 역할 | 경로 (예) |
 |---|---|---|
-| 마켓플레이스 git 클론 | 팀 배포 소스. git push 대상 | `~/.claude/plugins/marketplaces/geuneda-plugins/plugins/tc-dev-writer/` |
+| 사용자 로컬 작업본 | 직접 수정 및 git push 대상 | `/Users/<id>/geuneda-plugins/plugins/tc-dev-writer/` |
+| (참고) 마켓플레이스 캐시 | 팀원이 `update` 후 받아가는 캐시 | `~/.claude/plugins/marketplaces/geuneda-plugins/` |
 
-GitHub 저장소: https://github.com/geuneda/geuneda-plugins
+GitHub 원격: upstream `https://github.com/geuneda/geuneda-plugins`, 개인 fork는 origin (예: `TeamSpartaJaewook/geuneda-plugins`).
 
-기본적으로 마켓플레이스 클론에서 직접 수정하고 commit + push 하는 방식이다 (plan-to-devspec과 다르게 별도 로컬 작업본을 두지 않음). 팀원은 `/plugin marketplace update geuneda-plugins` 한 번 실행하면 받아간다.
+대다수 환경에서는 사용자별 로컬 작업본(`~/geuneda-plugins/`)에서 수정하고 origin에 push한 뒤 PR로 upstream에 머지하는 흐름이다. 마켓플레이스 캐시 경로는 팀원이 `/plugin marketplace update geuneda-plugins`로 받아간 사본일 뿐 거기서 직접 수정하지 않는다.
 
 ## 변경 흐름 (표준)
 
-1. **마켓플레이스 클론에서 직접 수정** —
+1. **로컬 작업본에서 직접 수정** —
    ```
-   ~/.claude/plugins/marketplaces/geuneda-plugins/plugins/tc-dev-writer/skills/tc-dev-writer/SKILL.md
-   ~/.claude/plugins/marketplaces/geuneda-plugins/plugins/tc-dev-writer/skills/tc-dev-writer/references/*.md
+   <작업본>/plugins/tc-dev-writer/skills/tc-dev-writer/SKILL.md
+   <작업본>/plugins/tc-dev-writer/skills/tc-dev-writer/references/*.md
    ```
 2. **로컬 테스트** — 아래 "테스트 절차" 참조
 3. **커밋 + push** —
    ```bash
-   cd ~/.claude/plugins/marketplaces/geuneda-plugins
    git add plugins/tc-dev-writer
    git commit -m "fix(tc-dev-writer): {요약}"
-   git push
+   git push origin <branch>
    ```
-4. **팀원 업데이트** — 팀원은 `/plugin marketplace update geuneda-plugins` 실행
+4. **팀원 업데이트** — 팀원은 `/plugin marketplace update geuneda-plugins` 실행 (변경이 upstream에 머지된 후)
 
 ## 테스트 절차
 
@@ -56,15 +56,20 @@ GitHub 저장소: https://github.com/geuneda/geuneda-plugins
 }
 ```
 
+`naming_pattern`은 더 이상 사용되지 않으므로 설정에 두지 않아도 된다.
+
 ### 회귀 검증 체크리스트
 
 스킬 수정 후 최소 다음을 확인:
 
 **기본 워크플로우**
 - [ ] 충분한 정보가 담긴 입력에서 역질문 없이 바로 등록 단계로 진행되는지
-- [ ] 부족한 입력에서 역질문이 카테고리별로 묶여 한 번에 던져지는지
+- [ ] 부족한 입력에서 `AskUserQuestion` 도구로 역질문이 호출되는지 (텍스트 1,2,3 나열 금지)
+- [ ] 카테고리가 4개 초과 시 4개로 묶고 나머지는 2차 호출로 분리되는지
 - [ ] 사용자 답변 후 TC가 4개 항목(항목/재현조건/절차/기대vs실제)을 모두 채우는지
 - [ ] 등록 직전 사용자 확인 단계가 빠짐없이 나오는지
+- [ ] **번호가 `notion-search` 조회 결과 정수 최대값 + 1로 부여되는지** (TC-... 슬러그 형태 금지)
+- [ ] 정수 파싱 가능한 기존 행이 0건일 때 번호가 `"1"`로 시작되는지
 - [ ] `notion-create-pages` 호출 시 `parent.data_source_id`가 대시 포함 UUID인지 (collection:// 접두 없는지)
 - [ ] 신규 페이지의 상태가 `진행 전`으로 설정되는지
 
@@ -97,6 +102,7 @@ GitHub 저장소: https://github.com/geuneda/geuneda-plugins
 
 - 노션 TC 데이터소스 schema(컬럼명/옵션명)가 바뀌면 `references/project_config.md`의 schema/values 매핑 안내도 갱신.
 - 새 옵션이 추가되면(예: 우선순위에 `긴급` 추가) `references/classification_rules.md`의 자동 판단 트리 갱신.
+- `번호` 컬럼 운영 규칙 변경 시 (예: prefix가 붙는 형태로 회귀) SKILL.md Step 7과 project_config.md의 다음 번호 조회 예시를 함께 수정.
 
 ### 안전 규칙
 
