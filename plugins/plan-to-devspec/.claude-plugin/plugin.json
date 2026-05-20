@@ -1,0 +1,9 @@
+{
+  "name": "plan-to-devspec",
+  "description": "노션 기획 데이터베이스를 작업 순서대로 처리해 개발 가능한 마크다운 명세서를 만든다. 기획서 검토 후 모호한 부분이 있으면 노션 상태를 '검토 필요'로 변경하고 비고에 요청 텍스트를 작성한다.",
+  "author": {
+    "name": "geuneda"
+  },
+  "repository": "https://github.com/geuneda/geuneda-plugins",
+  "keywords": ["notion", "plan", "spec", "design-doc", "game"]
+}
