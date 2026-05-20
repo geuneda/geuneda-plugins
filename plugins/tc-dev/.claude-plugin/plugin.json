@@ -1,0 +1,9 @@
+{
+  "name": "tc-dev",
+  "description": "TC(테스트케이스) 등록·처리 통합 플러그인. tc-dev-writer 스킬로 사용자가 발견한 현상을 개발자 작업 가능한 형태로 구체화해 노션 TC 데이터소스에 등록하고, tc-dev-resolver 스킬로 등록된 TC 번호를 받아 내용을 분석·코드 수정·원인 분석 후 처리 날짜·원인·상태를 자동 갱신한다.",
+  "author": {
+    "name": "geuneda"
+  },
+  "repository": "https://github.com/geuneda/geuneda-plugins",
+  "keywords": ["notion", "tc", "testcase", "qa", "bug-report", "bug-fix", "game", "rocketdan"]
+}

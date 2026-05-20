@@ -14,6 +14,13 @@
       "description": "노션 기획 데이터베이스에서 기획 완료 항목을 읽어 개발 명세서(마크다운)로 변환",
       "keywords": ["notion", "plan", "spec", "design-doc", "game", "rocketdan"],
       "category": "productivity"
+    },
+    {
+      "name": "tc-dev",
+      "source": "./plugins/tc-dev",
+      "description": "TC(테스트케이스) 등록·처리 통합 플러그인. tc-dev-writer 스킬은 발견한 현상을 개발자 작업 가능 형태로 구체화해 노션에 등록, tc-dev-resolver 스킬은 TC 번호를 받아 내용 분석·코드 수정 후 처리 날짜·원인·상태를 자동 갱신",
+      "keywords": ["notion", "tc", "testcase", "qa", "bug-report", "bug-fix", "game", "rocketdan"],
+      "category": "productivity"
     }
   ]
 }
