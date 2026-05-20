@@ -23,6 +23,13 @@
       "category": "productivity"
     },
     {
+      "name": "data-validator",
+      "source": "./plugins/data-validator",
+      "description": "Google Sheets 게임 데이터 테이블을 스키마/크로스참조/밸런스 이상치 3종 검증 후 Slack으로 알림. 매일 오전 10시 KST 자동 실행 및 수동 트리거(/validate-data) 지원.",
+      "keywords": ["google-sheets", "validation", "game-data", "slack", "balance", "schema", "rocketdan"],
+      "category": "productivity"
+    },
+    {
       "name": "qa-testcase-notion",
       "source": "./plugins/qa-testcase-notion",
       "description": "개발 완료된 기능의 코드 변경(커밋/PR diff)을 분석해 QA 친화 표현으로 변환하고 Notion TC 템플릿 DB에 행을 자동 추가. 환경 클러스터링 3단계 방법론으로 케이스 순서 최적화 + view 정렬·zero-pad 번호로 표시 안정성 보장",
