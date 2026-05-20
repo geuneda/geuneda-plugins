@@ -191,3 +191,12 @@ notion-update-page:
 - `references/project_config.md` - 프로젝트별 설정 파일 포맷과 신규 설정 절차
 - `references/review_checklist.md` - 검토 필요 판단 기준과 비고 작성 포맷
 - `references/dev_spec_template.md` - 개발 명세서 마크다운 템플릿과 작성 원칙
+- `references/maintainer.md` - 이 스킬 자체를 수정/배포하는 가이드 (파일 위치, 동기화, 테스트, push)
+
+## 이 스킬 자체를 업데이트하려면
+
+스킬 코드를 고치거나 새 기능을 더하려면 `references/maintainer.md`를 먼저 읽는다. 핵심 요점:
+
+- 스킬 파일은 두 곳에 존재: 로컬(`~/.claude/skills/plan-to-devspec/`)과 마켓플레이스 git 클론(`~/Desktop/geuneda-plugins/plugins/plan-to-devspec/skills/plan-to-devspec/`). 변경 시 양쪽 동기화 필수.
+- 테스트 디렉토리(`~/Desktop/plan-to-devspec-test/`)와 노션 테스트 데이터(데이터 소스 + 6개 시나리오)가 미리 준비되어 있다.
+- 변경 후 `~/Desktop/geuneda-plugins`에서 git commit + push 하면 팀원이 `/plugin marketplace update geuneda-plugins`로 받아감.
