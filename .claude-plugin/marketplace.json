@@ -14,6 +14,13 @@
       "description": "노션 기획 데이터베이스에서 기획 완료 항목을 읽어 개발 명세서(마크다운)로 변환",
       "keywords": ["notion", "plan", "spec", "design-doc", "game", "rocketdan"],
       "category": "productivity"
+    },
+    {
+      "name": "tc-dev-writer",
+      "source": "./plugins/tc-dev-writer",
+      "description": "TC(테스트케이스) 내용과 우선순위를 받아 개발자가 작업 가능한 형태로 구체화하고 노션 TC 데이터소스에 등록",
+      "keywords": ["notion", "tc", "testcase", "qa", "bug-report", "game", "rocketdan"],
+      "category": "productivity"
     }
   ]
 }
