@@ -29,6 +29,7 @@
     "before_planning": "기획 전",
     "planning_done": "기획 완료",
     "needs_review": "검토 필요",
+    "review_answered": "검토 완료",
     "dev_in_progress": "개발 진행중",
     "dev_done": "개발 완료"
   },
